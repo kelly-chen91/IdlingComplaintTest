@@ -34,6 +34,7 @@ internal class LoginVerificationTest : WebDriverSetUp
     {
         //locate login field
         loginModel.EnterEmail("ttseng@dep.nyc.gov");
+        Thread.Sleep(5000);
         loginModel.EnterPassword("Testing1#");
         loginModel.ClickLoginButton();
         GetDriver().Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);

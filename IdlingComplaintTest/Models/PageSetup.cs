@@ -15,7 +15,7 @@ namespace IdlingComplaintTest.Pages
         protected void ScrollToElement(IWebElement element)
         {
             ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
-            Thread.Sleep(500);
+            Thread.Sleep(5000);
         }
     }
 }

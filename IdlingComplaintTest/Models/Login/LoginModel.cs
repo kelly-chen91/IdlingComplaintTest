@@ -55,21 +55,6 @@ namespace IdlingComplaintTest.Pages.Login
             LoginButton.Click();
         }
 
-        //   public string GetTotalPrice()
-        //   {
-        //       return TotalPrice.Text;
-        //   }
-
-        //  public void EnterNotes(string notes)
-        //  {LoginButton
-        //      Notes.SendKeys(notes);
-        //  }
-
-        //    public void SelectWorkshop(int workshopIndex)
-        //    {
-        //        Workshops[workshopIndex].Click();
-        //    }
-
         public void ScrollToTheLoginButton()
         {
             ScrollToElement(LoginButton);
