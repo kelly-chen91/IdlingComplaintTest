@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework.Constraints;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -17,16 +18,20 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         private IWebElement Email => driver.FindElement(By.Id("mat-input-2"));                                  //Email
         private IWebElement Password => driver.FindElement(By.Id("mat-input-8"));                               //Password
         private IWebElement ConfirmPassword => driver.FindElement(By.Id("mat-input-9"));                        //Confirm Password
-        private IWebElement SecurityQuestion => driver.FindElement(By.Id("mat-select-1"));                      //Security Question                                                                                     
+        private IWebElement SecurityQuestion => driver.FindElement(By.Id("mat-select-1"));                      //Security Question                                                                                                     
         private IWebElement SecurityAnswer => driver.FindElement(By.Id("mat-input-10"));                        //Security Answer
         private IWebElement Address1 => driver.FindElement(By.Id("mat-input-3"));                               //Address1
         private IWebElement Address2 => driver.FindElement(By.Id("mat-input-4"));                               //Address2
         private IWebElement City => driver.FindElement(By.Id("mat-input-5"));                                   //City
-        private IWebElement State => driver.FindElement(By.Id("mat-option-0"));                                 //State                                                                                                 
+        private IWebElement State => driver.FindElement(By.Id("mat-select-0"));                                 //State                                                                                                 
         private IWebElement ZipCode => driver.FindElement(By.Id("mat-input-6"));                                //Zip Code
         private IWebElement Telephone => driver.FindElement(By.Id("mat-input-7"));                              //Telephone
         private IWebElement SubmitButton => driver.FindElement(By.CssSelector("button[color = 'primary']"));    //Submit Button
         private IWebElement CancelButton => driver.FindElement(By.CssSelector("button[type = 'reset']"));       //Cancel Button
+
+        /*SelectElement*/
+        //private SelectElement securityDropDown;
+        //private SelectElement stateOptions;
 
         /* Mutator Methods for the Form Fields */
         public void EnterFirstName(string firstName)
@@ -88,8 +93,8 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
 
         public void SelectState(string state)
         {
-            SelectElement option = new SelectElement(State);
-            option.SelectByValue(state);
+            SelectElement stateOptions = new SelectElement(State);
+            stateOptions.SelectByValue(state);
         }
         public void EnterZipCode(string zipCode) 
         { 
@@ -130,7 +135,8 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
 
         public string SelectSecurityQuestionValue() 
         {
-            return driver.FindElement(RelativeBy.WithLocator(By.ClassName("mat-select-value-text")).Below(SecurityQuestion)).Text;
+            return driver.FindElement(By.XPath("[@id=\"mat-select-1\"]/div/div[1]/span/span")).Text;
+            //return securityDropDown.SelectedOption.Text;
         }
 
         public string GetSecurityAnswerValue()
@@ -156,6 +162,7 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         public string GetStateValue()
         {
             return driver.FindElement(RelativeBy.WithLocator(By.ClassName("mat-select-value-text")).Below(State)).Text;
+            //return stateOptions.SelectedOption.Text;
         }
         public string GetZipCodeValue()
         {
@@ -182,5 +189,19 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         {
             ScrollToElement(SubmitButton);
         }
+
+        public IWebElement GetFirstName() { return FirstName; }
+        public IWebElement GetLastName() {  return LastName; }
+        public IWebElement GetEmail() { return Email; }
+        public IWebElement GetPassword() { return Password;}
+        public IWebElement GetConfirmPassword() { return ConfirmPassword;}
+        public IWebElement GetSecurityQuestion() { return  SecurityQuestion;}
+        public IWebElement GetSecurityAnswer() {  return SecurityAnswer;}
+        public IWebElement GetAddress1() { return Address1; }
+        public IWebElement GetAddress2() { return Address2; }
+        public IWebElement GetCity() { return City;}
+        public IWebElement GetState() { return State;}
+        public IWebElement GetZipCode() { return ZipCode;}
+        public IWebElement GetTelephone() { return  Telephone;}
     }
 }
