@@ -60,10 +60,9 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         [Test]
         [Category("Label Test")]
 
-        //Challenge: 
+        //Challenge: Finding the Default Text Option for Security Question dropdown and State options
         public void PlaceholderTest()
         {
-            //Thread.Sleep(10000);
             Assert.That(createAnAccountModel.GetFirstName().GetAttribute("placeholder"), Is.EqualTo(FIRSTNAME));
             Assert.That(createAnAccountModel.GetLastName().GetAttribute("placeholder"), Is.EqualTo(LASTNAME));
             Assert.That(createAnAccountModel.GetEmail().GetAttribute("placeholder"), Is.EqualTo(EMAIL));
@@ -79,9 +78,6 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
             //Assert.That(createAnAccountModel.GetStateValue(), Is.EqualTo(DEFAULTSTATE));
             Assert.That(createAnAccountModel.GetZipCode().GetAttribute("placeholder"), Is.EqualTo(ZIPCODE));
             Assert.That(createAnAccountModel.GetTelephone().GetAttribute("placeholder"), Is.EqualTo(TELEPHONE));
-            
-
-
         }
     }
 }
