@@ -79,5 +79,19 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
             Assert.That(createAnAccountModel.GetZipCode().GetAttribute("placeholder"), Is.EqualTo(ZIPCODE));
             Assert.That(createAnAccountModel.GetTelephone().GetAttribute("placeholder"), Is.EqualTo(TELEPHONE));
         }
+
+        [Test]
+        public void ValidEmailTest()
+        {
+            Boolean validEmail = createAnAccountModel.IsValidEmail("kchen@dep");
+            Console.WriteLine(validEmail);
+
+        }
+
+        [Test]
+        public void ValidPhoneNumberTest()
+        {
+            Console.WriteLine(createAnAccountModel.IsValidPhoneNumber("917770-0000"));
+        }
     }
 }

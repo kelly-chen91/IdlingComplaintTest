@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace IdlingComplaintTest.Pages.CreateAnAccount
@@ -203,5 +204,34 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         public IWebElement GetState() { return State;}
         public IWebElement GetZipCode() { return ZipCode;}
         public IWebElement GetTelephone() { return  Telephone;}
+
+        /* The following methods checking for validation of the fields: Email, Phone #, ZipCode, password */
+        public Boolean IsValidEmail(string email)
+        {
+            var regexPattern = @"^[a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
+            var regex = new Regex(regexPattern);
+            return regex.IsMatch(email);
+        }
+        
+        public String FormatPhoneNumber(string phone)
+        {
+            Regex regex = new Regex(@"[^\d]");
+            phone = regex.Replace(phone.Trim(), "");
+            phone = Regex.Replace(phone, @"(\d{3})(\d{3})(\d{4})", "$1-$2-$3");
+            return phone;
+        }
+        public Boolean IsValidPhoneNumber(string phoneNumber)
+        {
+            Console.WriteLine("original: " + phoneNumber);
+            phoneNumber = FormatPhoneNumber(phoneNumber);
+            Console.WriteLine("new: " + phoneNumber);
+            if (string.IsNullOrEmpty(phoneNumber))
+            {
+                return false;
+            }
+            string validPhoneRegex = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
+            return Regex.IsMatch(phoneNumber, validPhoneRegex);
+        }
+
     }
 }

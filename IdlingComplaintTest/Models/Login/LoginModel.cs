@@ -60,6 +60,17 @@ namespace IdlingComplaintTest.Pages.Login
             ScrollToElement(LoginButton);
         }
 
+        public IWebElement GetEmail()
+        {
+            return Email;
+        }
+
+        public IWebElement GetPassword()
+        {
+            return Password;
+        }
+
+
         //   public LoginStatusPage ClickLoginButton()
         //   {
         //       LoginButton.Click();
