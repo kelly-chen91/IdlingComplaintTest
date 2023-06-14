@@ -1,4 +1,5 @@
 ﻿using IdlingComplaintTest.Pages.Login;
+using IdlingComplaintTest.Tests.DriverSetUp;
 using IdlingComplaintTest.Utils;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace IdlingComplaintTest.Tests.LoginTests
 {
     [Parallelizable(ParallelScope.Children)]
     [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
-    internal class InputLengthTest : WebDriverSetUp
+    internal class InputLengthTest : DriverSetUp.DriverSetUp
     {
         private LoginModel loginModel;
         private const int MAXLENGTH = 50;
@@ -20,6 +21,7 @@ namespace IdlingComplaintTest.Tests.LoginTests
         public new void SetUp()
         {
             loginModel = new LoginModel(GetDriver());
+            GetDriver().Navigate().GoToUrl("https://nycidling-dev.azurewebsites.net/login");
         }
 
         //Length of Email is more than 50 characters.

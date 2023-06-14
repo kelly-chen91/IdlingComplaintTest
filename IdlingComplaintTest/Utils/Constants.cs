@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium.DevTools.V112.Runtime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IdlingComplaintTest.Utils
 {
-    internal class Labels
+    internal class Constants
     {
         public static readonly string PROFILE_HEADING = "Profile";
         public static readonly string FIRST_NAME = "First Name";
@@ -41,5 +42,9 @@ namespace IdlingComplaintTest.Utils
              ", lower case letter, number, and special character.";
         public static readonly string PASSWORD_POLICY_2 = "Please remember your Security Answer for future password retrieval.";
 
+
+        public static readonly string REQUIRED = "Required";
+        public static readonly string PASSWORD_REQUIRED = "Password is invalid. Please see the password policy above and try again.";
+        public static readonly string CONFIRM_PASSWORD_REQUIRED = "Password does not match. Please try again.";
     }
 }

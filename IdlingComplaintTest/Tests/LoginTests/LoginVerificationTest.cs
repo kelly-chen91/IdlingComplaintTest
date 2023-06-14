@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using IdlingComplaintTest.Pages.Login;
+using IdlingComplaintTest.Tests.DriverSetUp;
 
 namespace IdlingComplaintTest.Tests.LoginTests;
 
@@ -16,14 +17,15 @@ namespace IdlingComplaintTest.Tests.LoginTests;
 /*This is user login verification test
  */
 
-internal class LoginVerificationTest : WebDriverSetUp
+internal class LoginVerificationTest : DriverSetUp.DriverSetUp
 {
     private LoginModel loginModel;
 
     [SetUp]
-    public void Setup()
+    public new void SetUp()
     {
         loginModel = new LoginModel(GetDriver());
+        GetDriver().Navigate().GoToUrl("https://nycidling-dev.azurewebsites.net/login");
         GetDriver().Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
     }
 

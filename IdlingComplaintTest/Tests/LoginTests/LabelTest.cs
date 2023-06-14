@@ -1,4 +1,5 @@
 ﻿using IdlingComplaintTest.Pages.Login;
+using IdlingComplaintTest.Tests.DriverSetUp;
 using IdlingComplaintTest.Utils;
 using OpenQA.Selenium;
 using System;
@@ -16,7 +17,7 @@ namespace IdlingComplaintTest.Tests.LoginTests
 {
     [Parallelizable(ParallelScope.Children)]
     [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
-    internal class LabelTest : WebDriverSetUp
+    internal class LabelTest : DriverSetUp.DriverSetUp
     {
         private LoginModel loginModel;
         //private const string EMAIL = "Email";
@@ -26,10 +27,12 @@ namespace IdlingComplaintTest.Tests.LoginTests
         //private const string FORGOT_PASS = "Forgot Password";
         //private const string NOT_REGISTERED = "Not registered?";
         //private const string CREATE_ACCOUNT = "Create an account";
+
         [SetUp]
         public new void SetUp()
         {
             loginModel = new LoginModel(GetDriver());
+            GetDriver().Navigate().GoToUrl("https://nycidling-dev.azurewebsites.net/login");
         }
 
         [Test]
@@ -38,7 +41,7 @@ namespace IdlingComplaintTest.Tests.LoginTests
         public void EmailTest()
         {
             var placeholder = GetDriver().FindElement(By.Name("email")).GetAttribute("placeholder");
-            Assert.That(placeholder, Is.EqualTo(Labels.EMAIL));
+            Assert.That(placeholder, Is.EqualTo(Constants.EMAIL));
         }
 
         [Test]
@@ -47,7 +50,7 @@ namespace IdlingComplaintTest.Tests.LoginTests
         public void PasswordTest()
         {
             var placeholder = GetDriver().FindElement(By.Name("password")).GetAttribute("placeholder");
-            Assert.That(placeholder, Is.EqualTo(Labels.PASSWORD));
+            Assert.That(placeholder, Is.EqualTo(Constants.PASSWORD));
         }
 
         [Test]
@@ -55,7 +58,7 @@ namespace IdlingComplaintTest.Tests.LoginTests
         [Category("Text Label Test")]
         public void HeadingTest()
         {
-            Assert.That(GetDriver().FindElement(By.TagName("h3")).Text, Is.EqualTo(Labels.LOGIN_HEADING), "Heading does not match \"" + Labels.LOGIN_HEADING + "\"");
+            Assert.That(GetDriver().FindElement(By.TagName("h3")).Text, Is.EqualTo(Constants.LOGIN_HEADING), "Heading does not match \"" + Constants.LOGIN_HEADING + "\"");
         }
 
         [Test]
@@ -63,7 +66,7 @@ namespace IdlingComplaintTest.Tests.LoginTests
         public void LoginLabelTest()
         {
             string text = loginModel.ExtractTextFromXPath("/html/body/app-root/div/app-login/mat-card/mat-card-header/div/mat-card-title/h4/text()");
-            Assert.That(text, Is.EqualTo(Labels.LOGIN), "Login label does not match \"" + Labels.LOGIN + "\"");
+            Assert.That(text, Is.EqualTo(Constants.LOGIN), "Login label does not match \"" + Constants.LOGIN + "\"");
         }
 
         [Test]
@@ -71,21 +74,21 @@ namespace IdlingComplaintTest.Tests.LoginTests
         public void LoginButtonLabelTest()
         {
             string loginButtonText = loginModel.ExtractTextFromXPath("/html/body/app-root/div/app-login/mat-card/mat-card-content/form/div[3]/button/span/text()");
-            Assert.That(loginButtonText, Is.EqualTo(Labels.LOGIN), "Login button does not match \"" + Labels.LOGIN + "\"");
+            Assert.That(loginButtonText, Is.EqualTo(Constants.LOGIN), "Login button does not match \"" + Constants.LOGIN + "\"");
         }
 
         [Test]
         [Category("Text Label Test")]
         public void ForgetPasswordTextTest()
         {
-            Assert.That(GetDriver().FindElement(By.PartialLinkText("Forgot")).Text, Is.EqualTo(Labels.FORGOT_PASS), "Forget password does not match \"" + Labels.FORGOT_PASS + "\"");
+            Assert.That(GetDriver().FindElement(By.PartialLinkText("Forgot")).Text, Is.EqualTo(Constants.FORGOT_PASS), "Forget password does not match \"" + Constants.FORGOT_PASS + "\"");
         }
 
         [Test]
         [Category("Text Label Test")]
         public void CreateAccountTextTest()
         {
-            Assert.That(GetDriver().FindElement(By.PartialLinkText("Create")).Text, Is.EqualTo(Labels.CREATE_ACCOUNT),  "Create account does not match \"" + Labels.CREATE_ACCOUNT + "\"");
+            Assert.That(GetDriver().FindElement(By.PartialLinkText("Create")).Text, Is.EqualTo(Constants.CREATE_ACCOUNT),  "Create account does not match \"" + Constants.CREATE_ACCOUNT + "\"");
         }
 
         [Test]
@@ -93,7 +96,7 @@ namespace IdlingComplaintTest.Tests.LoginTests
         public void NotRegisteredTextTest()
         {
             string notRegisteredText = loginModel.ExtractTextFromXPath("/html/body/app-root/div/app-login/mat-card/mat-card-content/form/div[4]/p/text()");
-            Assert.That(notRegisteredText, Is.EqualTo(Labels.NOT_REGISTERED), "Not registered text does not match \"" + Labels.NOT_REGISTERED + "\"");
+            Assert.That(notRegisteredText, Is.EqualTo(Constants.NOT_REGISTERED), "Not registered text does not match \"" + Constants.NOT_REGISTERED + "\"");
             //IWebElement forgotPWUrl = GetDriver().FindElement(By.PartialLinkText("Forgot"));
             //            Assert.That(GetDriver().FindElement(RelativeBy.WithLocator(By.TagName("p")
             //                                                                         .Below(forgotPWUrl))));
