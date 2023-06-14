@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace IdlingComplaintTest.Utils
 {
-    public static class StringExtensions
+    public static class StringUtilities
     {
-        public static string GenerateRandomString(this string str, int length)
+        public static string GenerateRandomString(int length)
         {
             const string acceptedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var random = new Random();
-            str = string.Empty;
+            string str = string.Empty;
             for (int i = 0; i < length; i++)
             {
                 str += acceptedChars[random.Next(0, acceptedChars.Length)];

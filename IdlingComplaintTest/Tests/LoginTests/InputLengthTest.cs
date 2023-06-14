@@ -86,7 +86,7 @@ namespace IdlingComplaintTest.Tests.LoginTests
         [Category("Valid Email/Password Length")]
         public void ValidPasswordInputAtCutOffLength()
         {
-            string password = "".GenerateRandomString(50);
+            string password = StringUtilities.GenerateRandomString(50);
             loginModel.EnterPassword(password);
             string passwordVal = loginModel.GetPasswordValue();
             Assert.That(passwordVal.Length, Is.LessThanOrEqualTo(MAXLENGTH)); //checks that the password length is <= MAXLENGTH chars
@@ -125,7 +125,7 @@ namespace IdlingComplaintTest.Tests.LoginTests
         [Test]
         public void RandomStringTest()
         {
-            string random = "".GenerateRandomString(10);
+            string random = StringUtilities.GenerateRandomString(10);
             Console.WriteLine(random);
             Assert.That(random.Length, Is.EqualTo(10), "Random string length does not equal to 10");
         }

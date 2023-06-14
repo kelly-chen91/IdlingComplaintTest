@@ -46,6 +46,8 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         private const string ZIPCODE = "Zip Code";
         private const string TELEPHONE = "Telephone";
         private const int MAX_NAME_LENGTH = 50;
+        private const int MAX_PASSWORD_LENGTH = 50;
+        private const int MAX_SECURITY_ANSWER_LENGTH = 50;
         private const int MAX_EMAIL_LENGTH = 62;
         private const int MAX_ADDRESS_LENGTH = 95;
         private const int MAX_CITY_LENGTH = 35;
@@ -106,17 +108,29 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         [Test]
         public void MaxLengthAttributeTest()
         {
-            var maxLengthList = new ArrayList();
-            maxLengthList.Add(createAnAccountModel.GetFirstName().MaxLengthAttributeValue()); 
-            maxLengthList.Add(createAnAccountModel.GetLastName().MaxLengthAttributeValue());
-            maxLengthList.Add(createAnAccountModel.GetEmail().MaxLengthAttributeValue());
-            maxLengthList.Add(createAnAccountModel.GetPassword().MaxLengthAttributeValue());
-            maxLengthList.Add(createAnAccountModel.GetConfirmPassword().MaxLengthAttributeValue());
-            maxLengthList.Add(createAnAccountModel.GetSecurityAnswer().MaxLengthAttributeValue());
-            maxLengthList.Add(createAnAccountModel.GetAddress1().MaxLengthAttributeValue());
-            maxLengthList.Add(createAnAccountModel.GetAddress2().MaxLengthAttributeValue());
-            
-           
+            int maxFirstNameLength = createAnAccountModel.GetFirstName().MaxLengthAttributeValue(); 
+            int maxLastNameLength = createAnAccountModel.GetLastName().MaxLengthAttributeValue();
+            int maxEmailLength = createAnAccountModel.GetEmail().MaxLengthAttributeValue();
+            int maxPasswordLength = createAnAccountModel.GetPassword().MaxLengthAttributeValue();
+            int maxConfirmPasswordLength = createAnAccountModel.GetConfirmPassword().MaxLengthAttributeValue();
+            int maxSecurityAnsLength = createAnAccountModel.GetSecurityAnswer().MaxLengthAttributeValue();
+            int maxAddress1Length = createAnAccountModel.GetAddress1().MaxLengthAttributeValue();
+            int maxAddress2Length = createAnAccountModel.GetAddress2().MaxLengthAttributeValue();
+            int maxCityLength = createAnAccountModel.GetCity().MaxLengthAttributeValue();
+            int maxZipCodeLength = createAnAccountModel.GetZipCode().MaxLengthAttributeValue();
+            int maxTelephoneLength = createAnAccountModel.GetTelephone().MaxLengthAttributeValue();
+
+            Assert.That(maxFirstNameLength, Is.EqualTo(MAX_NAME_LENGTH), "The maxlength attribute for name is supposed to be: " + MAX_NAME_LENGTH);
+            Assert.That(maxLastNameLength, Is.EqualTo(MAX_NAME_LENGTH), "The maxlength attribute for name is supposed to be: " + MAX_NAME_LENGTH);
+            Assert.That(maxEmailLength, Is.EqualTo(MAX_EMAIL_LENGTH), "The maxlength attribute for email is supposed to be: " + MAX_EMAIL_LENGTH);
+            Assert.That(maxPasswordLength, Is.EqualTo(MAX_PASSWORD_LENGTH), "The maxlength attribute for password is supposed to be: " + MAX_PASSWORD_LENGTH);
+            Assert.That(maxConfirmPasswordLength, Is.EqualTo(MAX_PASSWORD_LENGTH), "The maxlength attribute for email is supposed to be: " + MAX_PASSWORD_LENGTH);
+            Assert.That(maxSecurityAnsLength, Is.EqualTo(MAX_SECURITY_ANSWER_LENGTH), "The maxlength attribute for email is supposed to be: " + MAX_SECURITY_ANSWER_LENGTH);
+            Assert.That(maxAddress1Length, Is.EqualTo(MAX_ADDRESS_LENGTH), "The maxlength attribute for email is supposed to be: " + MAX_ADDRESS_LENGTH);
+            Assert.That(maxAddress2Length, Is.EqualTo(MAX_ADDRESS_LENGTH), "The maxlength attribute for email is supposed to be: " + MAX_ADDRESS_LENGTH);
+            Assert.That(maxCityLength, Is.EqualTo(MAX_CITY_LENGTH), "The maxlength attribute for email is supposed to be: " + MAX_CITY_LENGTH);
+            Assert.That(maxZipCodeLength, Is.EqualTo(MAX_ZIPCODE_LENGTH), "The maxlength attribute for email is supposed to be: " + MAX_ZIPCODE_LENGTH);
+            Assert.That(maxTelephoneLength, Is.EqualTo(MAX_PHONE_NUMBER_LENGTH), "The maxlength attribute for email is supposed to be: " + MAX_PHONE_NUMBER_LENGTH);
         }
 
 
