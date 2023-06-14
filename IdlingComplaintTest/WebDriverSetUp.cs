@@ -55,31 +55,31 @@ namespace IdlingComplaintTest
             }
         }
 
-        public int MaxLengthAttributeValue(IWebElement element)
-        {
-            var attribute = element.GetAttribute("maxlength");
-            Assert.IsNotNull(attribute, "The element does not have a maxlength attribute.");
-            return int.Parse(attribute);
-        }
-
-        public int MinLengthAttributeValue(IWebElement element)
-        {
-            var attribute = element.GetAttribute("minlength");
-            Assert.IsNotNull(attribute, "The element does not have a minlength attribute.");
-            return int.Parse(attribute);
-        }
+//        public int MaxLengthAttributeValue(IWebElement element)
+//        {
+//            var attribute = element.GetAttribute("maxlength");
+//            Assert.IsNotNull(attribute, "The element does not have a maxlength attribute.");
+//            return int.Parse(attribute);
+//        }
+//
+//        public int MinLengthAttributeValue(IWebElement element)
+//        {
+//            var attribute = element.GetAttribute("minlength");
+//            Assert.IsNotNull(attribute, "The element does not have a minlength attribute.");
+//            return int.Parse(attribute);
+//        }
             
-        public string GenerateRandomString(int length)
-        {
-            const string acceptedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var random = new Random();
-            string randomStr = string.Empty;
-            for(int i = 0; i < length; i++)
-            {
-                randomStr += acceptedChars[random.Next(0, acceptedChars.Length)];
-            }
-            return randomStr;
-        }
+ //       public string GenerateRandomString(int length)
+ //       {
+ //           const string acceptedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+ //           var random = new Random();
+ //           string randomStr = string.Empty;
+ //           for(int i = 0; i < length; i++)
+ //           {
+ //               randomStr += acceptedChars[random.Next(0, acceptedChars.Length)];
+ //           }
+ //           return randomStr;
+ //       }
  //      private string[] GetBrowserArguments()
  //      {
  //          if (ConfigurationProvider.Configuration["browserArguments"] != null)
