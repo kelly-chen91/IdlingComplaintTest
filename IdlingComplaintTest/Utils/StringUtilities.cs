@@ -19,5 +19,6 @@ namespace IdlingComplaintTest.Utils
             }
             return str;
         }
+
     }
 }

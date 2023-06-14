@@ -22,5 +22,7 @@ namespace IdlingComplaintTest.Utils
             Assert.IsNotNull(attribute, "The element does not have a minlength attribute.");
             return int.Parse(attribute);
         }
+
+        
     }
 }
