@@ -67,11 +67,11 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
             optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-57\"]/span")));
 
             List<string> questionList = new List<string>();
-            questionList.Add(ExtractTextFromXPath("//*[@id=\"mat-option-53\"]/span/text()"));
-            questionList.Add(ExtractTextFromXPath("//*[@id=\"mat-option-54\"]/span/text()"));
-            questionList.Add(ExtractTextFromXPath("//*[@id=\"mat-option-55\"]/span/text()"));
-            questionList.Add(ExtractTextFromXPath("//*[@id=\"mat-option-56\"]/span/text()"));
-            questionList.Add(ExtractTextFromXPath("//*[@id=\"mat-option-57\"]/span/text()"));
+            questionList.Add(optionElementList[0].Text);
+            questionList.Add(optionElementList[1].Text);
+            questionList.Add(optionElementList[2].Text);
+            questionList.Add(optionElementList[3].Text);
+            questionList.Add(optionElementList[4].Text);
             if (questionIndex >= questionList.Count || questionIndex < 0)
             {
                 return; 

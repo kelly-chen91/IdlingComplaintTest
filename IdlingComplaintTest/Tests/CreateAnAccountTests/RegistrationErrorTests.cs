@@ -182,17 +182,19 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         [Category("Required Filled Fields Label Test")]
         public void FilledPasswordTest()
         {
-            createAnAccountModel.EnterPassword("xxx");
+            createAnAccountModel.EnterPassword("T3sting.222");
+            Thread.Sleep(1000);
             string error = createAnAccountModel.ExtractTextFromXPath("//mat-card-content/div[4]/div[1]/div[1]/mat-form-field/div/div[3]/div/mat-error/text()");
             Assert.That(error, Is.EqualTo(string.Empty));
+            FilledConfirmPasswordTest();
         }
 
         /*Tests for no error when confirm password field is filled*/
-        [Test]
-        [Category("Required Filled Fields Label Test")]
+        //[Test]
+        //[Category("Required Filled Fields Label Test")]
         public void FilledConfirmPasswordTest()
         {
-            createAnAccountModel.EnterConfirmPassword("xxx");
+            createAnAccountModel.EnterConfirmPassword("T3sting.222");
             string error = createAnAccountModel.ExtractTextFromXPath("//mat-card-content/div[4]/div[1]/div[2]/mat-form-field/div/div[3]/div/mat-error/text()");
             Assert.That(error, Is.EqualTo(string.Empty));
         }
