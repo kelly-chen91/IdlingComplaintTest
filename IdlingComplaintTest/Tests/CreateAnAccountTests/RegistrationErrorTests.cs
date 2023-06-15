@@ -202,7 +202,7 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         [Category("Required Filled Fields Label Test")]
         public void FilledSecurityQuestionTest()
         {
-            createAnAccountModel.SelectSecurityQuestion("xxx");
+            createAnAccountModel.SelectSecurityQuestion(0);
             string error = createAnAccountModel.ExtractTextFromXPath("//mat-card-content/div[4]/div[2]/mat-form-field/div/div[3]/div/mat-error/text()");
             Assert.That(error, Is.EqualTo(string.Empty));
         }
@@ -242,7 +242,7 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         [Category("Required Filled Fields Label Test")]
         public void FilledStateTest()
         {
-            createAnAccountModel.SelectState("xxx");
+            createAnAccountModel.SelectState(0);
             string error = createAnAccountModel.ExtractTextFromXPath("//mat-card-content/div[8]/mat-form-field/div/div[3]/div/mat-error/text()");
             Assert.That(error, Is.EqualTo(string.Empty));
         }

@@ -1,12 +1,5 @@
-﻿using NUnit.Framework.Constraints;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OpenQA.Selenium;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace IdlingComplaintTest.Pages.CreateAnAccount
 {
@@ -29,6 +22,9 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         private IWebElement Telephone => driver.FindElement(By.Id("mat-input-7"));                              //Telephone
         private IWebElement SubmitButton => driver.FindElement(By.CssSelector("button[color = 'primary']"));    //Submit Button
         private IWebElement CancelButton => driver.FindElement(By.CssSelector("button[type = 'reset']"));       //Cancel Button
+        private string selectedSecurityQuestion = "--";
+        private string selectedState = "--";
+
 
         /*SelectElement*/
         //private SelectElement securityDropDown;
@@ -60,12 +56,28 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         }
 
         
-        public void SelectSecurityQuestion(string securityQuestion) 
+        public void SelectSecurityQuestion(int questionIndex) 
         {
-            //SelectElement dropDown = new SelectElement(SecurityQuestion);
-            //dropDown.SelectByValue(securityQuestion);
-            //dropDown.SelectByIndex(0);
             SecurityQuestion.Click();
+            List<IWebElement> optionElementList = new List<IWebElement>();
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-53\"]/span")));
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-54\"]/span")));
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-55\"]/span")));
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-56\"]/span")));
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-57\"]/span")));
+
+            List<string> questionList = new List<string>();
+            questionList.Add(ExtractTextFromXPath("//*[@id=\"mat-option-53\"]/span/text()"));
+            questionList.Add(ExtractTextFromXPath("//*[@id=\"mat-option-54\"]/span/text()"));
+            questionList.Add(ExtractTextFromXPath("//*[@id=\"mat-option-55\"]/span/text()"));
+            questionList.Add(ExtractTextFromXPath("//*[@id=\"mat-option-56\"]/span/text()"));
+            questionList.Add(ExtractTextFromXPath("//*[@id=\"mat-option-57\"]/span/text()"));
+            if (questionIndex >= questionList.Count || questionIndex < 0)
+            {
+                return; 
+            }
+            optionElementList[questionIndex].Click();
+            UpdateOption(questionList[questionIndex], true);
             //GetDriver().find
             Thread.Sleep(5000);
         }
@@ -96,10 +108,30 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
             City.SendKeys(city);
         }
 
-        public void SelectState(string state)
+        public void SelectState(int stateIndex)
         {
-            SelectElement stateOptions = new SelectElement(State);
-            stateOptions.SelectByValue(state);
+            State.Click();
+            List<IWebElement> optionElementList = new List<IWebElement>();
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-2\"]/span")));
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-3\"]/span")));
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-4\"]/span")));
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-5\"]/span")));
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-6\"]/span")));
+
+            List<string> stateList = new List<string>();
+            stateList.Add(optionElementList[0].Text);
+            stateList.Add(optionElementList[1].Text);
+            stateList.Add(optionElementList[2].Text);
+            stateList.Add(optionElementList[3].Text);
+            stateList.Add(optionElementList[4].Text);
+            if (stateIndex >= stateList.Count || stateIndex < 0)
+            {
+                return;
+            }
+            optionElementList[stateIndex].Click();
+            UpdateOption(stateList[stateIndex], false);
+            //GetDriver().find
+            Thread.Sleep(5000);
         }
         public void EnterZipCode(string zipCode) 
         { 
@@ -140,8 +172,7 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
 
         public string SelectSecurityQuestionValue() 
         {
-            return driver.FindElement(By.XPath("[@id=\"mat-select-1\"]/div/div[1]/span/span")).Text;
-            //return securityDropDown.SelectedOption.Text;
+            return selectedSecurityQuestion;
         }
 
         public string GetSecurityAnswerValue()
@@ -166,8 +197,7 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
 
         public string GetStateValue()
         {
-            return driver.FindElement(RelativeBy.WithLocator(By.ClassName("mat-select-value-text")).Below(State)).Text;
-            //return stateOptions.SelectedOption.Text;
+            return selectedState;
         }
         public string GetZipCodeValue()
         {
@@ -235,6 +265,12 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
             }
             string validPhoneRegex = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
             return Regex.IsMatch(phoneNumber, validPhoneRegex);
+        }
+
+        public void UpdateOption(string elementText, Boolean isSecurityQuestion)
+        {
+            if (isSecurityQuestion) this.selectedSecurityQuestion = elementText;
+            else this.selectedState = elementText;
         }
 
     }
