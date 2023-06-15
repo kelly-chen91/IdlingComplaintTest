@@ -62,9 +62,11 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         
         public void SelectSecurityQuestion(string securityQuestion) 
         {
-            SelectElement dropDown = new SelectElement(SecurityQuestion);
+            //SelectElement dropDown = new SelectElement(SecurityQuestion);
             //dropDown.SelectByValue(securityQuestion);
-            dropDown.SelectByIndex(0);
+            //dropDown.SelectByIndex(0);
+            SecurityQuestion.Click();
+            //GetDriver().find
             Thread.Sleep(5000);
         }
 
