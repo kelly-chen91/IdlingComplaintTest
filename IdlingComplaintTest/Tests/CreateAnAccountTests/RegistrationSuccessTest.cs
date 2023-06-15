@@ -27,7 +27,7 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         {
             createAnAccountModel.EnterFirstName("Jane");
             createAnAccountModel.EnterLastName("Doe");
-            createAnAccountModel.EnterEmail("kellychen966@gmail.com");
+            createAnAccountModel.EnterEmail("kellychen966@com");
             createAnAccountModel.EnterPassword("T3sting@1234");
             createAnAccountModel.EnterConfirmPassword("T3sting@1234");
             createAnAccountModel.SelectSecurityQuestion(0);
