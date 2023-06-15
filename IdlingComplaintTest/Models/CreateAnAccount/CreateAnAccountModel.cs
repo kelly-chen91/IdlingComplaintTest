@@ -63,7 +63,9 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         public void SelectSecurityQuestion(string securityQuestion) 
         {
             SelectElement dropDown = new SelectElement(SecurityQuestion);
-            dropDown.SelectByValue(securityQuestion);
+            //dropDown.SelectByValue(securityQuestion);
+            dropDown.SelectByIndex(0);
+            Thread.Sleep(5000);
         }
 
         //public void SelectSecurityQuestion1(SelectElement dropDown)

@@ -13,7 +13,7 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
 {
     [Parallelizable(ParallelScope.Children)]
     [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
-    internal partial class LabelTests : DriverSetUp.DriverSetUp
+    internal partial class RegistrationLabelTests : DriverSetUp.DriverSetUp
     {
         private CreateAnAccountModel createAnAccountModel;
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace IdlingComplaintTest.Tests.CreateAnAccountTests
 {
 
-    internal class InputLengthTest : DriverSetUp.DriverSetUp
+    internal class RegistrationInputLengthTest : DriverSetUp.DriverSetUp
     {
         private CreateAnAccountModel createAnAccountModel;
 
