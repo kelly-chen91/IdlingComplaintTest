@@ -1,5 +1,6 @@
 ﻿using IdlingComplaintTest.Pages.CreateAnAccount;
 using IdlingComplaintTest.Pages.Login;
+using IdlingComplaintTest.Utils;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -27,15 +28,15 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         {
             createAnAccountModel.EnterFirstName("Jane");
             createAnAccountModel.EnterLastName("Doe");
-            createAnAccountModel.EnterEmail("kellychen966@com");
+            createAnAccountModel.EnterEmail(StringUtilities.GenerateRandomEmail());
             createAnAccountModel.EnterPassword("T3sting@1234");
             createAnAccountModel.EnterConfirmPassword("T3sting@1234");
-            createAnAccountModel.SelectSecurityQuestion(0);
+            createAnAccountModel.SelectSecurityQuestion(1);
             createAnAccountModel.EnterSecurityAnswer("Testing");
             createAnAccountModel.EnterAddress1("59-17 Junction Blvd");
             createAnAccountModel.EnterAddress2("10th Fl");
             createAnAccountModel.EnterCity("Queens");
-            createAnAccountModel.SelectState(0);
+            createAnAccountModel.SelectState(1);
             createAnAccountModel.EnterZipCode("11373");
             createAnAccountModel.EnterPhone("631-632-9800");
             createAnAccountModel.ScrollToButton();
@@ -51,7 +52,7 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         {
             createAnAccountModel.EnterFirstName("Jane");
             createAnAccountModel.EnterLastName("Doe");
-            createAnAccountModel.EnterEmail("kellychen966@com");
+            createAnAccountModel.EnterEmail(StringUtilities.GenerateRandomEmail());
             createAnAccountModel.EnterPassword("T3sting@1234");
             createAnAccountModel.EnterConfirmPassword("T3sting@1234");
             createAnAccountModel.SelectSecurityQuestion(0);
@@ -59,14 +60,28 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
             createAnAccountModel.EnterAddress1("59-17 Junction Blvd");
             createAnAccountModel.EnterAddress2("10th Fl");
             createAnAccountModel.EnterCity("Queens");
-            createAnAccountModel.SelectState(0);
+            createAnAccountModel.SelectState(1);
             createAnAccountModel.EnterZipCode("11373");
             createAnAccountModel.EnterPhone("631-632-9800");
             createAnAccountModel.ScrollToButton();
             createAnAccountModel.ClickCancelButton();
             var loginButton = GetDriver().FindElement(By.XPath("/html/body/app-root/div/app-login/mat-card/mat-card-content/form/div[3]/button"));
-            Assert.IsNotNull(loginButton);
+            Assert.IsNotNull(loginButton, "Cancel Button does not load back to the home page.");
             //Thread.Sleep(60000);
+        }
+
+        [Test]
+        [Category("Cancel Registration Test")]
+        public void ClearPageAfterCancelTest()
+        {
+            Assert.That(createAnAccountModel.GetCancelButton().GetAttribute("type"), Is.EqualTo("reset"));
+
+        }
+
+        [Test]
+        public void RandomEmailTest()
+        {
+            Console.WriteLine(StringUtilities.GenerateRandomEmail());
         }
     }
 }

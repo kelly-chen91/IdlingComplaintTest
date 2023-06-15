@@ -7,28 +7,24 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
     {
         public CreateAnAccountModel(IWebDriver driver) : base(driver) { }
 
-        private IWebElement FirstName => driver.FindElement(By.Id("mat-input-0"));                              //First Name
-        private IWebElement LastName => driver.FindElement(By.Id("mat-input-1"));                               //Last Name
-        private IWebElement Email => driver.FindElement(By.Id("mat-input-2"));                                  //Email
-        private IWebElement Password => driver.FindElement(By.Id("mat-input-8"));                               //Password
-        private IWebElement ConfirmPassword => driver.FindElement(By.Id("mat-input-9"));                        //Confirm Password
-        private IWebElement SecurityQuestion => driver.FindElement(By.Id("mat-select-1"));                      //Security Question                                                                                                     
-        private IWebElement SecurityAnswer => driver.FindElement(By.Id("mat-input-10"));                        //Security Answer
-        private IWebElement Address1 => driver.FindElement(By.Id("mat-input-3"));                               //Address1
-        private IWebElement Address2 => driver.FindElement(By.Id("mat-input-4"));                               //Address2
-        private IWebElement City => driver.FindElement(By.Id("mat-input-5"));                                   //City
-        private IWebElement State => driver.FindElement(By.Id("mat-select-0"));                                 //State                                                                                                 
-        private IWebElement ZipCode => driver.FindElement(By.Id("mat-input-6"));                                //Zip Code
-        private IWebElement Telephone => driver.FindElement(By.Id("mat-input-7"));                              //Telephone
-        private IWebElement SubmitButton => driver.FindElement(By.CssSelector("button[color = 'primary']"));    //Submit Button
-        private IWebElement CancelButton => driver.FindElement(By.CssSelector("button[type = 'reset']"));       //Cancel Button
+        private IWebElement FirstName => driver.FindElement(By.CssSelector("input[formcontrolname = 'firstname']"));                            //First Name
+        private IWebElement LastName => driver.FindElement(By.CssSelector("input[formcontrolname = 'lastname']"));                              //Last Name
+        private IWebElement Email => driver.FindElement(By.CssSelector("input[formcontrolname = 'emailaddress1']"));                            //Email
+        private IWebElement Password => driver.FindElement(By.CssSelector("input[formcontrolname = 'idc_password']"));                          //Password
+        private IWebElement ConfirmPassword => driver.FindElement(By.CssSelector("input[formcontrolname = 'confirmPassword']"));                 //Confirm Password
+        private IWebElement SecurityQuestion => driver.FindElement(By.CssSelector("mat-select[formcontrolname = '_idc_securityquestion_value']"));    //Security Question                                                                                                     
+        private IWebElement SecurityAnswer => driver.FindElement(By.CssSelector("input[formcontrolname = 'idc_securityanswer']"));              //Security Answer
+        private IWebElement Address1 => driver.FindElement(By.CssSelector("input[formcontrolname = 'address1_line1']"));                        //Address1
+        private IWebElement Address2 => driver.FindElement(By.CssSelector("input[formcontrolname = 'address1_line2']"));                        //Address2
+        private IWebElement City => driver.FindElement(By.CssSelector("input[formcontrolname = 'address1_city']"));                             //City
+        private IWebElement State => driver.FindElement(By.CssSelector("mat-select[formcontrolname = 'address1_stateorprovince']"));                 //State                                                                                                 
+        private IWebElement ZipCode => driver.FindElement(By.CssSelector("input[formcontrolname = 'address1_postalcode']"));                    //Zip Code
+        private IWebElement Telephone => driver.FindElement(By.CssSelector("input[formcontrolname = 'address1_telephone1']"));                  //Telephone
+        private IWebElement SubmitButton => driver.FindElement(By.CssSelector("button[color = 'primary']"));                                    //Submit Button
+        private IWebElement CancelButton => driver.FindElement(By.CssSelector("button[type = 'reset']"));                                       //Cancel Button
+
         private string selectedSecurityQuestion = "--";
         private string selectedState = "--";
-
-
-        /*SelectElement*/
-        //private SelectElement securityDropDown;
-        //private SelectElement stateOptions;
 
         /* Mutator Methods for the Form Fields */
         public void EnterFirstName(string firstName)
@@ -59,34 +55,22 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         public void SelectSecurityQuestion(int questionIndex) 
         {
             SecurityQuestion.Click();
-            List<IWebElement> optionElementList = new List<IWebElement>();
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-53\"]/span")));
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-54\"]/span")));
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-55\"]/span")));
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-56\"]/span")));
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-57\"]/span")));
-
-            List<string> questionList = new List<string>();
-            questionList.Add(optionElementList[0].Text);
-            questionList.Add(optionElementList[1].Text);
-            questionList.Add(optionElementList[2].Text);
-            questionList.Add(optionElementList[3].Text);
-            questionList.Add(optionElementList[4].Text);
-            if (questionIndex >= questionList.Count || questionIndex < 0)
+            List<IWebElement> optionElementList = new List<IWebElement>
             {
-                return; 
-            }
+                driver.FindElement(By.XPath("//*[@id=\"mat-option-1\"]/span")), //Default Option
+                driver.FindElement(By.XPath("//*[@id=\"mat-option-53\"]/span")),
+                driver.FindElement(By.XPath("//*[@id=\"mat-option-54\"]/span")),
+                driver.FindElement(By.XPath("//*[@id=\"mat-option-55\"]/span")),
+                driver.FindElement(By.XPath("//*[@id=\"mat-option-56\"]/span")),
+                driver.FindElement(By.XPath("//*[@id=\"mat-option-57\"]/span"))
+            };
+
+            List<string> questionList = ConvertOptionToText(optionElementList);
+            if (questionIndex >= questionList.Count || questionIndex < 0) return;
             optionElementList[questionIndex].Click();
             UpdateOption(questionList[questionIndex], true);
-            //GetDriver().find
             Thread.Sleep(5000);
         }
-
-        //public void SelectSecurityQuestion1(SelectElement dropDown)
-        //{
-        //    dropDown = new SelectElement(SecurityQuestion);
-        //    dropDown.SelectByValue(securityQuestion);
-        //}
 
         public void EnterSecurityAnswer(string answer)
         {
@@ -112,25 +96,17 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         {
             State.Click();
             List<IWebElement> optionElementList = new List<IWebElement>();
+            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-0\"]/span"))); //Default Option
             optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-2\"]/span")));
             optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-3\"]/span")));
             optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-4\"]/span")));
             optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-5\"]/span")));
             optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-6\"]/span")));
 
-            List<string> stateList = new List<string>();
-            stateList.Add(optionElementList[0].Text);
-            stateList.Add(optionElementList[1].Text);
-            stateList.Add(optionElementList[2].Text);
-            stateList.Add(optionElementList[3].Text);
-            stateList.Add(optionElementList[4].Text);
-            if (stateIndex >= stateList.Count || stateIndex < 0)
-            {
-                return;
-            }
+            List<string> stateList = ConvertOptionToText(optionElementList);
+            if (stateIndex >= stateList.Count || stateIndex < 0) return;
             optionElementList[stateIndex].Click();
             UpdateOption(stateList[stateIndex], false);
-            //GetDriver().find
             Thread.Sleep(5000);
         }
         public void EnterZipCode(string zipCode) 
@@ -238,6 +214,7 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         public IWebElement GetState() { return State;}
         public IWebElement GetZipCode() { return ZipCode;}
         public IWebElement GetTelephone() { return  Telephone;}
+        public IWebElement GetCancelButton() { return CancelButton;}
 
         /* The following methods checking for validation of the fields: Email, Phone #, ZipCode, password */
         public Boolean IsValidEmail(string email)
@@ -271,6 +248,16 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         {
             if (isSecurityQuestion) this.selectedSecurityQuestion = elementText;
             else this.selectedState = elementText;
+        }
+
+        public List<string> ConvertOptionToText(List<IWebElement> elements)
+        {
+            List<string> list = new List<string>();
+            for (int i = 0; i < elements.Count; i++)
+            {
+                list.Add(elements[i].Text);
+            }
+            return list;
         }
 
     }

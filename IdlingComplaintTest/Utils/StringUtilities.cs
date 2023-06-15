@@ -20,5 +20,11 @@ namespace IdlingComplaintTest.Utils
             return str;
         }
 
+        public static string GenerateRandomEmail()
+        {
+            var random = new Random();
+            int length = random.Next(1, 20);
+            return GenerateRandomString(length) + "@dep.nyc.gov";
+        }
     }
 }
