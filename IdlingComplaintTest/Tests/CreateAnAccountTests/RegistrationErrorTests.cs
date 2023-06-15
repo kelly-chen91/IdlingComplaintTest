@@ -31,6 +31,10 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
 
         }
 
+        public void ValidZipCodeTest()
+        {
+            /* The program does not test for valid zip code upon entry */
+        }
 
         public void ValidPhoneNumberTest()
         {
@@ -268,7 +272,6 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
             string error = createAnAccountModel.ExtractTextFromXPath("//mat-card-content/div[10]/mat-form-field/div/div[3]/div/mat-error/text()");
             Assert.That(error, Is.EqualTo(string.Empty));
         }
-
 
 
     }
