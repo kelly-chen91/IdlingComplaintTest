@@ -94,6 +94,8 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         {
             string error = createAnAccountModel.ExtractTextFromXPath("//mat-card-content/div[4]/div[2]/mat-form-field/div/div[3]/div/mat-error/text()");
             Assert.That(error, Is.EqualTo(Constants.REQUIRED));
+            createAnAccountModel.SelectSecurityQuestion(0);
+            Assert.That(error, Is.EqualTo(Constants.REQUIRED));
         }
 
         /*Tests for error when security answer field is empty*/
@@ -129,6 +131,8 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         public void RequiredStateTest()
         {
             string error = createAnAccountModel.ExtractTextFromXPath("//mat-card-content/div[8]/mat-form-field/div/div[3]/div/mat-error/text()");
+            Assert.That(error, Is.EqualTo(Constants.REQUIRED));
+            createAnAccountModel.SelectState(0);
             Assert.That(error, Is.EqualTo(Constants.REQUIRED));
         }
 
@@ -208,7 +212,7 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         [Category("Required Filled Fields Label Test")]
         public void FilledSecurityQuestionTest()
         {
-            createAnAccountModel.SelectSecurityQuestion(0);
+            createAnAccountModel.SelectSecurityQuestion(1);
             string error = createAnAccountModel.ExtractTextFromXPath("//mat-card-content/div[4]/div[2]/mat-form-field/div/div[3]/div/mat-error/text()");
             Assert.That(error, Is.EqualTo(string.Empty));
         }
@@ -248,7 +252,7 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         [Category("Required Filled Fields Label Test")]
         public void FilledStateTest()
         {
-            createAnAccountModel.SelectState(0);
+            createAnAccountModel.SelectState(1);
             string error = createAnAccountModel.ExtractTextFromXPath("//mat-card-content/div[8]/mat-form-field/div/div[3]/div/mat-error/text()");
             Assert.That(error, Is.EqualTo(string.Empty));
         }

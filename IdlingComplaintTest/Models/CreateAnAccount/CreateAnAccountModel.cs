@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
 namespace IdlingComplaintTest.Pages.CreateAnAccount
@@ -55,21 +56,13 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         public void SelectSecurityQuestion(int questionIndex) 
         {
             SecurityQuestion.Click();
-            List<IWebElement> optionElementList = new List<IWebElement>
-            {
-                driver.FindElement(By.XPath("//*[@id=\"mat-option-1\"]/span")), //Default Option
-                driver.FindElement(By.XPath("//*[@id=\"mat-option-53\"]/span")),
-                driver.FindElement(By.XPath("//*[@id=\"mat-option-54\"]/span")),
-                driver.FindElement(By.XPath("//*[@id=\"mat-option-55\"]/span")),
-                driver.FindElement(By.XPath("//*[@id=\"mat-option-56\"]/span")),
-                driver.FindElement(By.XPath("//*[@id=\"mat-option-57\"]/span"))
-            };
-
+            var security = driver.FindElement(By.Id("mat-select-1-panel"));
+            var optionElementList = security.FindElements(By.TagName("span"));
+            Thread.Sleep(1000);
             List<string> questionList = ConvertOptionToText(optionElementList);
             if (questionIndex >= questionList.Count || questionIndex < 0) return;
             optionElementList[questionIndex].Click();
             UpdateOption(questionList[questionIndex], true);
-            Thread.Sleep(5000);
         }
 
         public void EnterSecurityAnswer(string answer)
@@ -95,19 +88,13 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
         public void SelectState(int stateIndex)
         {
             State.Click();
-            List<IWebElement> optionElementList = new List<IWebElement>();
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-0\"]/span"))); //Default Option
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-2\"]/span")));
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-3\"]/span")));
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-4\"]/span")));
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-5\"]/span")));
-            optionElementList.Add(driver.FindElement(By.XPath("//*[@id=\"mat-option-6\"]/span")));
-
+            var state = driver.FindElement(By.Id("mat-select-0-panel"));
+            var optionElementList = state.FindElements(By.TagName("span"));
+            Thread.Sleep(1000);
             List<string> stateList = ConvertOptionToText(optionElementList);
             if (stateIndex >= stateList.Count || stateIndex < 0) return;
             optionElementList[stateIndex].Click();
             UpdateOption(stateList[stateIndex], false);
-            Thread.Sleep(5000);
         }
         public void EnterZipCode(string zipCode) 
         { 
@@ -250,7 +237,7 @@ namespace IdlingComplaintTest.Pages.CreateAnAccount
             else this.selectedState = elementText;
         }
 
-        public List<string> ConvertOptionToText(List<IWebElement> elements)
+        public List<string> ConvertOptionToText(ReadOnlyCollection<IWebElement> elements)
         {
             List<string> list = new List<string>();
             for (int i = 0; i < elements.Count; i++)

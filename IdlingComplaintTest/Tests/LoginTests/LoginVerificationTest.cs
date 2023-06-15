@@ -69,9 +69,8 @@ internal class LoginVerificationTest : DriverSetUp.DriverSetUp
         loginModel.EnterEmail("ttseng@dep.nyc.gov");
         loginModel.EnterPassword("Testing1");
         loginModel.ClickLoginButton();
-        //GetDriver().Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
         var wait = new WebDriverWait(GetDriver(), TimeSpan.FromSeconds(10)); //1 - too short
-        wait.Until(d => d.FindElement(By.CssSelector("button[routerlink='idlingcomplaint/new']")));
+        wait.Until(d => d.FindElement(By.TagName("simple-snack-bar")));
     }
 
     //Email/Password does not match

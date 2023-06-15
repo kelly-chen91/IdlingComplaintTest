@@ -83,5 +83,6 @@ namespace IdlingComplaintTest.Tests.CreateAnAccountTests
         {
             Console.WriteLine(StringUtilities.GenerateRandomEmail());
         }
+
     }
 }
